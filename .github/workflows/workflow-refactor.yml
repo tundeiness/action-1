@@ -1,7 +1,7 @@
-name: my-first-workflow
+name: my-first-workflow refactor
 on: push
 jobs:
-    first-job:
+    first-job-refactor:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Repo
