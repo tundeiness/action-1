@@ -1,0 +1,94 @@
+name: multiple jobs in sequence using need, uploading and downloading artifacts
+on: push
+jobs:
+  build_job_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v5
+
+      - name: install cowsay program
+        run: sudo apt-get install cowsay -y
+
+      - name: execute cowsay command
+        run: cowsay -f dragon "I am a Dragon raaaarwww" >> sample.txt
+
+      - name: upload sample text artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-text-file
+          path: sample.txt
+
+      - name: sleep for 3 seconds
+        run: sleep 3
+
+      # - name: check if file exist
+      #   run: grep -i "dragon" sample.txt
+
+      # - name: list hidden files
+      #   run: ls -a
+
+      # - name: Read file 
+      #   run: cat sample.txt
+
+      # - name: list repo files
+      #   run: ls -ltra
+  test_job_2:
+    needs: build_job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo  not really neccessary for this job
+        uses: actions/checkout@v5
+
+      - name: download sample text artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: sample-text-file
+
+      - name: list repo files
+        run: ls -ltra
+
+      - name: test if file exist
+        run: grep -i "dragon" sample.txt
+
+      - name: sleep for 4 seconds
+        run: sleep 4
+
+      # - name: list hidden files
+      #   run: ls -a
+
+      # - name: Read file 
+      #   run: cat sample.txt
+
+  deploy_job_3:
+    needs: build_job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v5
+
+      - name: download sample-text file artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: sample-text-file
+
+      - name: Read file 
+        run: cat sample.txt
+
+      - name: Deploy
+        run: echo Deploying ...
+
+      # - name: execute cowsay command
+      #   run: cowsay -f dragon "I am a Dragon raaaarwww" >> sample.txt
+
+      # - name: check if file exist
+      #   run: grep -i "dragon" sample.txt
+
+      # - name: list hidden files
+      #   run: ls -a
+
+      # - name: Read file 
+      #   run: cat sample.txt
+
+      # - name: list repo files
+      #   run: ls -ltra
