@@ -11,10 +11,10 @@ jobs:
         run: sudo apt-get install cowsay -y
 
       - name: execute cowsay command
-        run: cowsay -f dog "woof woof!" >> sample.txt
+        run: cowsay -f dragon "I am a Dragon raaaarwww" >> sample.txt
 
       - name: check if file exist
-        run: grep -i "woof" sample.txt
+        run: grep -i "dragon" sample.txt
 
       - name: list hidden files
         run: ls -a
