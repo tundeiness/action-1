@@ -1,1 +1,26 @@
+name: generate ascii art
+on: push
+jobs:
+  ascii-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name:checkout repo
+        uses: actions/checkout@v5
 
+      - name: install cowsay program
+        run: sudo apt-get install cowsay -y
+
+      - name: execute cowsay command
+        run: cowsay -f dog "woof woof!" >> sample.txt
+
+      - name: check if file exist
+        run: grep -i "woof" sample.txt
+
+      - name: list hidden files
+        run: ls -a
+
+      - name: Read file 
+        run: cat sample.txt
+
+      - name: list repo files
+        run: ls -ltra
