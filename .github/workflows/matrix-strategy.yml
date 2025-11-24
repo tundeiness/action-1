@@ -1,1 +1,39 @@
+name: Matrix Configurashun
+on:
+    push:
+    workflow_dispatch:
 
+# approach number one ineffective
+jobs:
+    deploy-on-ubuntu:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Echo Docker Detail
+          run: docker info
+
+        - name: Run Images
+          run: Docker run hello-world
+
+    deploy-on-windows:
+        runs-on: windows-latest
+        steps:
+        - name: Echo Docker Detail
+          run: docker info
+
+        - name: Run Images
+          run: docker run hello-world
+
+# approach number two is suitable
+
+    deploy:
+        strategy:
+            matrix:
+                os: [ubuntu-latest, ubuntu-20.05, windows-latest]
+                images: [hello-world, alpine]
+        runs-on: ${{ matrix.os }}
+        steps:
+        - name: echo docker details
+          run: docker info
+
+        - name: run images on ${{ matrix.images }}
+          run: docker run ${{ matrix.images }}
