@@ -45,9 +45,9 @@ jobs:
           run: echo "$NEEDS_CONTEXT"
           
         - name: update repo description
+          run: gh repo edit tundeiness/action-1 --description "New repo description"
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: gh repo edit tundeiness/action-1 --description "New repo description"
 
         # - name: display matrix context
         #   env:
