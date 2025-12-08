@@ -2,11 +2,12 @@ name: dump context
 on:
     push
 
-permissions:
-    contents: write
+    
 jobs:
     dump_context_to_log:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
         steps:
         - name: display github context
           env:
