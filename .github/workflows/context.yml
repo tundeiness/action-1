@@ -43,7 +43,7 @@ jobs:
         - name: update repo description
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: gh repo edit tundeiness/https://github.com/tundeiness/action-1 --description "New repo description"
+          run: gh repo edit gh repo edit tundeiness/action-1 --description "New repo description"
 
         # - name: display matrix context
         #   env:
