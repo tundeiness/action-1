@@ -43,6 +43,13 @@ jobs:
           env:
             NEEDS_CONTEXT: ${{toJson(needs)}}
           run: echo "$NEEDS_CONTEXT"
+
+        - name: Debug
+          run: |
+            echo "Testing GH CLI authentication..."
+            gh auth status || echo "Auth failed"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
         - name: update repo description
           run: gh repo edit tundeiness/action-1 --description "New repo description"
