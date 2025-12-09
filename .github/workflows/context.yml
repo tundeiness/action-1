@@ -50,11 +50,12 @@ jobs:
             gh auth status || echo "Auth failed"
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{ secrets.PAT_TOKEN }}
           
         - name: update repo description
           run: gh repo edit tundeiness/action-1 --description "New repo description"
           env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
         # - name: display matrix context
         #   env:
