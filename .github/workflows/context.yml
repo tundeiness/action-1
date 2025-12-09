@@ -55,7 +55,8 @@ jobs:
         - name: update repo description
           run: gh repo edit tundeiness/action-1 --description "New repo description"
           env:
-              GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+              # GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+              GH_TOKEN: ${{ github.token }}
 
         # - name: display matrix context
         #   env:
